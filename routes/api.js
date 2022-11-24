@@ -2405,7 +2405,7 @@ res.json(loghandler.invalidKey)
 }
 })
 
-router.get('/nsfw/darkpfp', async (req, res, next) => {
+router.get('/random/darkpfp', async (req, res, next) => {
         var Apikey = req.query.apikey
             
 	if(!Apikey) return res.json(loghandler.notparam)
