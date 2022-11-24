@@ -2340,6 +2340,21 @@ router.get('/nsfw/ahegao', async (req, res, next) => {
 res.json(loghandler.invalidKey)
 }
 })
+router.get('/nsfw/ryouiki', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const ryou = JSON.parse(fs.readFileSync(__path +'/data/ryouiki.json'));
+  const randayou = ryou[Math.floor(Math.random() * ryou.length)];
+  data = await fetch(randayou).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/ryouiki.jpeg', data)
+  res.sendFile(__path +'/tmp/ryouiki.jpeg')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
 
 router.get('/nsfw/ass', async (req, res, next) => {
         var Apikey = req.query.apikey
