@@ -2389,6 +2389,22 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get('/nsfw/zeta', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const zeta = JSON.parse(fs.readFileSync(__path +'/data/zeta.json'));
+  const ranzeta = zeta[Math.floor(Math.random() * zeta.length)];
+  data = await fetch(ranzeta).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/zeta.jpeg', data)
+  res.sendFile(__path +'/tmp/zeta.jpeg')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
+
 router.get('/nsfw/bdsm', async (req, res, next) => {
         var Apikey = req.query.apikey
             
