@@ -2340,21 +2340,6 @@ router.get('/nsfw/ahegao', async (req, res, next) => {
 res.json(loghandler.invalidKey)
 }
 })
-router.get('/nsfw/ryouiki', async (req, res, next) => {
-        var Apikey = req.query.apikey
-            
-	if(!Apikey) return res.json(loghandler.notparam)
-	if(listkey.includes(Apikey)){
-
-  const ryou = JSON.parse(fs.readFileSync(__path +'/data/ryouiki.json'));
-  const randayou = ryou[Math.floor(Math.random() * ryou.length)];
-  data = await fetch(randayou).then(v => v.buffer())
-  await fs.writeFileSync(__path +'/tmp/ryouiki.jpeg', data)
-  res.sendFile(__path +'/tmp/ryouiki.jpeg')
-} else {
-res.json(loghandler.invalidKey)
-}
-})
 
 router.get('/nsfw/ass', async (req, res, next) => {
         var Apikey = req.query.apikey
@@ -2367,6 +2352,22 @@ router.get('/nsfw/ass', async (req, res, next) => {
   data = await fetch(randass).then(v => v.buffer())
   await fs.writeFileSync(__path +'/tmp/ass.jpeg', data)
   res.sendFile(__path +'/tmp/ass.jpeg')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
+
+router.get('/nsfw/ryouiki', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const ryo = JSON.parse(fs.readFileSync(__path +'/data/ryouiki.json'));
+  const randry = ryo[Math.floor(Math.random() * ryo.length)];
+  data = await fetch(randry).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/ryo.jpeg', data)
+  res.sendFile(__path +'/tmp/ryo.jpeg')
 } else {
 res.json(loghandler.invalidKey)
 }
