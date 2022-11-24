@@ -2405,6 +2405,22 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get('/nsfw/darkpfp', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const drak = JSON.parse(fs.readFileSync(__path +'/data/drak.json'));
+  const randrak = drak[Math.floor(Math.random() * drak.length)];
+  data = await fetch(randrak).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/drak.jpeg', data)
+  res.sendFile(__path +'/tmp/drak.jpeg')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
+
 router.get('/nsfw/bdsm', async (req, res, next) => {
         var Apikey = req.query.apikey
             
