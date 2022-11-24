@@ -48,7 +48,7 @@
 - [`Saweria.co`](https://saweria.co/xylaa)
 
 <p align="left">
-Donate me if you want :)
+Donate me if you want<3
 </p>
 
 #### ADVANTAGES 📍
