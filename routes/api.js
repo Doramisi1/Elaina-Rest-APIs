@@ -2373,6 +2373,22 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get('/nsfw/kobo', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const kobo = JSON.parse(fs.readFileSync(__path +'/data/kobo.json'));
+  const randkob = kobo[Math.floor(Math.random() * kobo.length)];
+  data = await fetch(randkob).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/kobo.jpeg', data)
+  res.sendFile(__path +'/tmp/kobo.jpeg')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
+
 router.get('/nsfw/bdsm', async (req, res, next) => {
         var Apikey = req.query.apikey
             
