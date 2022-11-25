@@ -2421,6 +2421,22 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get('/random/bocil', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const bocil = JSON.parse(fs.readFileSync(__path +'/data/bocil.json'));
+  const ranv = bocil[Math.floor(Math.random() * bocil.length)];
+  data = await fetch(ranv).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/bocil.jpeg', data)
+  res.sendFile(__path +'/tmp/bocil.jpeg')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
+
 router.get('/nsfw/bdsm', async (req, res, next) => {
         var Apikey = req.query.apikey
             
