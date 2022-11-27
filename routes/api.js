@@ -2421,6 +2421,22 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get('/nsfw/ollie', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const ollie = JSON.parse(fs.readFileSync(__path +'/data/ollie.json'));
+  const ranol = ollie[Math.floor(Math.random() * ollie.length)];
+  data = await fetch(ranol).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/ollie.jpeg', data)
+  res.sendFile(__path +'/tmp/ollie.jpeg')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
+
 router.get('/random/darkpfp', async (req, res, next) => {
         var Apikey = req.query.apikey
             
