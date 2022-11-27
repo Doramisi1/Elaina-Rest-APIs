@@ -2405,6 +2405,22 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get('/nsfw/kaela', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const kaela = JSON.parse(fs.readFileSync(__path +'/data/kaela.json'));
+  const ranka = kaela[Math.floor(Math.random() * kaela.length)];
+  data = await fetch(ranka).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/kaela.jpeg', data)
+  res.sendFile(__path +'/tmp/kaela.jpeg')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
+
 router.get('/random/darkpfp', async (req, res, next) => {
         var Apikey = req.query.apikey
             
