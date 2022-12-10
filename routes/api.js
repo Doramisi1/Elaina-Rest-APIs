@@ -2885,6 +2885,22 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get('/random/ayanokouji', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const ayano = JSON.parse(fs.readFileSync(__path +'/data/ayanokouji.json'));
+  const ranay = ayano[Math.floor(Math.random() * ayano.length)];
+  data = await fetch(ranay).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/ayanokouji.jpeg', data)
+  res.sendFile(__path +'/tmp/ayanokouji.jpeg')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
+
 router.get('/wallpaper/shinomiya', async (req, res, next) => {
         var Apikey = req.query.apikey
             
